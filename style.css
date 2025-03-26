@@ -831,6 +831,48 @@ h2 {
     font-size: 12px;
     margin: 5px 0;
   }
+
+  /* 어휘카드 크기 최적화 */
+  .word {
+    padding: 3px 6px; /* 패딩 약간 증가 */
+    margin: 2px; /* 마진 약간 증가 */
+    border-radius: 6px;
+  }
+
+  /* 폰트 크기 증가로 가독성 개선 */
+  .word-char {
+    font-size: 18px; /* 한자 크기 증가 (16px → 18px) */
+    margin-bottom: 1px; /* 간격 약간 추가 */
+    line-height: 1.1;
+  }
+
+  .word-pinyin {
+    font-size: 11px; /* 병음 크기 증가 (9px → 11px) */
+    line-height: 1.1;
+    margin-top: 0; /* margin-top 제거 */
+  }
+
+  /* 배열 셀 크기 및 정렬 개선 */
+  .target-container {
+    min-height: 60px; /* 기본 높이 증가 (40px → 60px) */
+    padding: 8px 5px; /* 패딩 조정 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 가로 가운데 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    gap: 3px; /* 카드 간 간격 약간 증가 */
+  }
+
+  /* 배열 셀이 비어있을 때도 높이 유지 */
+  .target-container:empty {
+    min-height: 60px;
+    display: flex;
+  }
+
+  /* 배열 셀 내부 카드 정렬 */
+  .target-container .word {
+    margin: 3px; /* 내부 카드 마진 조정 */
+  }
 }
 
 /* 모든 화면에서 어휘카드 배열 보드 최적화 */
