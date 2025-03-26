@@ -1,3 +1,152 @@
+/* 1. viewport 설정 확인 (HTML에 추가) */
+/* <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> */
+
+/* 2. 게임 컨테이너 스타일 통일 */
+#game-container {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  box-sizing: border-box;
+  height: auto;
+  overflow: visible;
+}
+
+/* 3. 단어 카드 통일 */
+.word {
+  padding: 10px 15px;
+  margin: 8px;
+  height: auto;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.word-char {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.word-pinyin {
+  font-size: 14px;
+}
+
+/* 4. 정답 영역 */
+.target-container {
+  min-height: 80px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* 5. 정답 메시지 */
+#result-message {
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 400px;
+}
+
+#result-message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+#result-message.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* 6. 다음 버튼 */
+#next-button {
+  display: block;
+  margin: 15px auto;
+  padding: 10px 25px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 7. Day 버튼 그리드 */
+.day-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.day-button {
+  padding: 15px 10px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* 8. 게임 정보 (타이머, 진행 상황) */
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* 9. 한국어 문장 */
+#korean-sentence {
+  font-size: 18px;
+  margin: 15px 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* 10. 전체 게임 레이아웃 */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 11. 제목과 크레딧 */
+.game-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.credit {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,30 +173,6 @@ body {
   background-image: linear-gradient(120deg, #fdfbfb 0%, #fff3e0 100%);
 }
 
-.container {
-  width: 100%;
-  max-width: 500px;
-  background-color: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(255, 152, 0, 0.2);
-  position: relative;
-  border-top: 8px solid #ff9800;
-  border-bottom: 8px solid #ff9800;
-}
-
-.credit {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  font-family: 'Nanum Pen Script', cursive;
-  font-size: 18px;
-  color: #ff7043;
-  transform: rotate(5deg);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-}
-
 h1,
 h2 {
   text-align: center;
@@ -68,74 +193,8 @@ h2 {
   margin-top: 10px;
 }
 
-.day-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 25px;
-}
-
-@media (min-width: 400px) {
-  .day-buttons {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 500px) {
-  .day-buttons {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-.day-button {
-  padding: 15px 5px;
-  background-color: #ff9800;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 3px 6px rgba(255, 152, 0, 0.3);
-}
-
-.day-button:active {
-  transform: scale(0.98);
-}
-
-.day-button:hover {
-  background-color: #f57c00;
-  transform: translateY(-2px);
-}
-
-.day-button.locked {
-  background-color: #e0e0e0;
-  color: #9e9e9e;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
 .hidden {
   display: none;
-}
-
-#game-container {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
-  min-height: auto;
-  max-height: none;
-  overflow: visible;
-}
-
-#timer,
-#progress {
-  margin-bottom: 15px;
-  font-size: 18px;
-  text-align: center;
-  font-weight: bold;
-  color: #e65100;
 }
 
 #instruction {
@@ -154,43 +213,6 @@ h2 {
   min-height: 100px;
 }
 
-.word {
-  padding: 8px 12px;
-  margin: 5px;
-  height: auto;
-  max-height: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #fff3e0;
-  border: 1px solid #ffe0b2;
-  border-radius: 10px;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.3s;
-  box-shadow: 0 3px 8px rgba(255, 152, 0, 0.15);
-  overflow: hidden;
-}
-
-.word:active {
-  transform: scale(0.95);
-}
-
-.word:hover {
-  background-color: #ffe0b2;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 12px rgba(255, 152, 0, 0.25);
-}
-
-.word-char {
-  font-family: 'ZCOOL XiaoWei', serif;
-  font-size: 24px;
-  font-weight: normal;
-  margin-bottom: 3px;
-  color: #e65100;
-  letter-spacing: -0.5px;
-}
-
 .word-char.long-text {
   font-size: 20px;
   letter-spacing: -0.8px;
@@ -199,21 +221,6 @@ h2 {
 .word-char.very-long-text {
   font-size: 16px;
   letter-spacing: -1px;
-}
-
-.word-pinyin {
-  font-family: 'Arial Unicode MS', 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  font-size: 14px;
-  color: #ff7043;
-  font-weight: normal;
-  letter-spacing: 0;
-  line-height: 1.2;
-  text-align: center;
-}
-
-.word-pinyin.long-text {
-  font-size: 12px;
-  letter-spacing: 0;
 }
 
 #target-sentence {
@@ -236,7 +243,6 @@ h2 {
   margin-top: 30px;
 }
 
-#next-button,
 #back-button {
   padding: 15px 25px;
   background-color: #ff5722;
@@ -250,51 +256,14 @@ h2 {
   box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
 }
 
-#next-button:active,
 #back-button:active {
   transform: scale(0.98);
 }
 
-#next-button:hover,
 #back-button:hover {
   background-color: #e64a19;
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(255, 87, 34, 0.4);
-}
-
-#result-message {
-  margin: 20px auto 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 12px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  top: -20px;
-  max-width: 80%;
-}
-
-#result-message.success {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-  border: 1px solid #a5d6a7;
-}
-
-#result-message.error {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #ef9a9a;
-}
-
-#next-button {
-  margin: 5px auto;
-  display: block;
-  position: relative;
-  top: -25px;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-weight: bold;
 }
 
 .success {
@@ -678,27 +647,6 @@ h2 {
   .word-container {
     margin-top: 10px;
   }
-}
-
-/* 게임 컨테이너 높이 제한 제거 */
-#game-container {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
-  min-height: auto;
-  max-height: none;
-  overflow: visible;
-}
-
-/* 타이머와 진행 상황 영역 */
-.game-info {
-  position: sticky;
-  top: 0;
-  background-color: #fff;
-  padding: 10px 0;
-  z-index: 10;
-  margin-bottom: 15px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* 학습일 선택 화면 */
