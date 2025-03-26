@@ -352,8 +352,14 @@ document.addEventListener('DOMContentLoaded', function () {
         resultMessage.className = 'success';
 
         // 다음 버튼 표시
-        document.getElementById('next-button').classList.remove('hidden');
-        document.getElementById('next-button').onclick = nextSentence;
+        const nextButton = document.getElementById('next-button');
+        nextButton.classList.remove('hidden');
+        nextButton.onclick = nextSentence;
+
+        // 모바일에서 다음 버튼이 항상 보이도록 클래스 추가
+        if (window.innerWidth <= 768) {
+          nextButton.classList.add('fixed-bottom');
+        }
       } else {
         resultMessage.textContent = '순서가 잘못되었습니다. 다시 시도하세요.';
         resultMessage.className = 'error';
@@ -366,8 +372,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 다음 문장으로 이동
+  // 창 크기 변경 시 처리
+  window.addEventListener('resize', function () {
+    const nextButton = document.getElementById('next-button');
+    if (!nextButton.classList.contains('hidden')) {
+      if (window.innerWidth <= 768) {
+        nextButton.classList.add('fixed-bottom');
+      } else {
+        nextButton.classList.remove('fixed-bottom');
+      }
+    }
+  });
+
+  // 다음 문제로 넘어갈 때 fixed-bottom 클래스 제거
   function nextSentence() {
+    const nextButton = document.getElementById('next-button');
+    nextButton.classList.remove('fixed-bottom');
+
     currentSentenceIndex++;
 
     // 모든 문장을 완료했는지 확인
