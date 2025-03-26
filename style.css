@@ -137,7 +137,7 @@ h2 {
   margin: 15px 0;
   text-align: center;
   font-size: 16px;
-  color: #7e57c2;
+  color: orangered;
 }
 
 #word-container {
@@ -584,18 +584,6 @@ h2 {
 .chinese-text {
   font-family: 'Noto Serif SC', serif;
 }
-
-/* 필요시 @font-face 규칙으로 직접 폰트 파일 호스팅할 경우 */
-/*
-@font-face {
-  font-family: 'AlibabaPuHuiTi';
-  src: url('path/to/AlibabaPuHuiTi-Regular.woff2') format('woff2'),
-       url('path/to/AlibabaPuHuiTi-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-*/
 
 /* 간소화된 완료 메시지 스타일 */
 .next-unlock-info {
