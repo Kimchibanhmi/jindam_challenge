@@ -146,20 +146,25 @@ body {
 /* 11. 제목과 크레딧 */
 .game-title {
   text-align: center;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
   margin: 10px 0 30px;
   color: #e07a2d;
   position: relative;
 }
 
+/* Created by 크레딧 - 위치 조정 */
 .credit {
   position: absolute;
-  top: 5px;
-  right: 15px;
+  top: 10px;
+  right: 20px;
   font-size: 14px;
   color: #e07a2d;
   font-family: 'Jua', sans-serif;
+  background-color: #fff; /* 배경색 추가 */
+  padding: 5px 10px; /* 패딩 추가 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
 }
 
 * {
@@ -633,8 +638,27 @@ h2 {
   }
 
   .credit {
-    margin-top: 8px;
-    font-size: 14px;
+    position: absolute;
+    top: 50px; /* 타이틀 아래로 이동 */
+    right: 50%; /* 중앙 정렬을 위해 */
+    transform: translateX(50%); /* 중앙 정렬 완성 */
+    font-size: 12px;
+    margin-top: 5px;
+    background-color: #fff8e1; /* 크림색 배경 */
+    padding: 3px 8px;
+  }
+
+  .divider {
+    margin-top: 50px; /* 크레딧 아래로 충분한 공간 */
+  }
+
+  /* 결과 메시지와 버튼 더 위로 올림 */
+  #result-message {
+    top: -15px;
+  }
+
+  #next-button {
+    top: -10px;
   }
 
   .button,
@@ -740,7 +764,8 @@ body {
 .divider {
   border: none;
   border-top: 2px dashed #f8c68d;
-  margin: 25px 0;
+  margin: 35px 0 25px; /* 상단 여백 증가 */
+  clear: both; /* float 요소 클리어 */
 }
 
 /* 게임 정보 - 중앙 정렬, 주황색 */
@@ -789,7 +814,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   gap: 15px;
-  margin: 30px 0;
+  margin: 30px 0 15px; /* 하단 여백 축소 */
 }
 
 /* 단어 카드 - 크림색 배경, 주황색 글자 */
@@ -832,13 +857,15 @@ body {
 /* 결과 메시지 */
 #result-message {
   text-align: center;
-  padding: 12px 20px;
-  margin: 20px auto;
+  padding: 10px 20px;
+  margin: 5px auto 10px; /* 여백 축소 */
   width: 80%;
   max-width: 400px;
   border-radius: 12px;
   font-size: 18px;
   font-weight: bold;
+  position: relative;
+  top: -10px; /* 위로 올림 */
 }
 
 #result-message.success {
@@ -868,6 +895,10 @@ body {
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 5px auto 15px; /* 여백 축소 */
+  display: block;
+  position: relative;
+  top: -5px; /* 위로 올림 */
 }
 
 #next-button:hover,
@@ -930,4 +961,22 @@ body {
   .word-char {
     font-size: 24px;
   }
+}
+
+/* 상단 중복 제목과 크레딧 숨기기 */
+body > .container > .game-title,
+body > .container > .credit {
+  display: none;
+}
+
+/* 또는 해당 요소가 다음과 같은 구조라면 */
+#page-header .game-title,
+#page-header .credit {
+  display: none;
+}
+
+/* 게임 보드 내부 제목과 크레딧은 그대로 유지 */
+#game-container .game-title,
+#game-container .credit {
+  display: block; /* 또는 필요한 display 속성 */
 }
