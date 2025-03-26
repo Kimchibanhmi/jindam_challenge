@@ -15,44 +15,48 @@
 
 /* 3. 단어 카드 통일 */
 .word {
-  padding: 10px 15px;
-  margin: 8px;
-  height: auto;
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px 10px;
+  margin: 4px;
+  background-color: #fff8e1;
+  border: 1px solid #f8c68d;
+  border-radius: 10px;
   cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .word-char {
+  font-size: 22px;
+  margin-bottom: 4px;
+  color: #333;
   font-family: 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', 'SimSun',
     sans-serif;
-  font-size: 28px;
-  margin-bottom: 6px;
-  color: #333;
-  font-weight: normal;
-  letter-spacing: 1px;
 }
 
 .word-pinyin {
-  font-family: 'Arial Unicode MS', 'Noto Sans', 'PingFang SC', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: #e07a2d;
-  letter-spacing: 0.5px;
+  font-family: 'Arial Unicode MS', 'Noto Sans', 'PingFang SC', sans-serif;
 }
 
 /* 4. 정답 영역 */
 .target-container {
-  min-height: 80px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border: 1px dashed #ccc;
-  border-radius: 8px;
-  margin: 20px 0;
+  min-height: 0;
+  height: auto;
+  padding: 10px;
+  background-color: #fffdf7;
+  border: 2px dashed #f8c68d;
+  border-radius: 15px;
+  margin: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: height 0.3s ease;
 }
 
 /* 5. 정답 메시지 */
@@ -110,12 +114,35 @@
 /* 8. 게임 정보 (타이머, 진행 상황) */
 .game-info {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  background-color: #f5f5f5;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  background-color: #f8f9fa;
   border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 14px;
+  flex-wrap: nowrap;
+}
+
+/* 타이머와 진행 상황 인라인 표시 */
+.timer,
+.progress {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+/* 요소 간 간격 */
+.timer {
+  margin-right: 15px;
+  color: #e07a2d;
+}
+
+.progress {
+  color: #e07a2d;
+  font-weight: bold;
 }
 
 /* 9. 한국어 문장 */
@@ -663,11 +690,9 @@ h2 {
 
   /* 타이머와 진행 상황 간격 축소 */
   .game-info {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-    font-size: 14px;
+    padding: 3px 8px;
+    font-size: 12px;
+    margin-bottom: 8px;
   }
 
   /* 한국어 문장 간격 축소 */
@@ -709,7 +734,7 @@ h2 {
 
   /* 단어 카드 크기 축소 */
   .word {
-    padding: 6px 10px;
+    padding: 6px 8px;
     margin: 4px;
   }
 
@@ -719,7 +744,7 @@ h2 {
   }
 
   .word-pinyin {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   /* 단어 컨테이너 간격 축소 */
@@ -878,16 +903,19 @@ body {
 
 /* 타겟 컨테이너 - 점선 테두리 */
 .target-container {
-  min-height: 100px;
+  min-height: 0;
+  height: auto;
+  padding: 10px;
   background-color: #fffdf7;
   border: 2px dashed #f8c68d;
   border-radius: 15px;
-  padding: 20px;
-  margin: 25px 0;
+  margin: 15px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 6px;
+  transition: height 0.3s ease;
 }
 
 /* 단어 컨테이너 */
@@ -1037,11 +1065,16 @@ body {
   }
 
   .word {
-    padding: 12px;
+    padding: 6px 8px;
   }
 
   .word-char {
-    font-size: 24px;
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+
+  .word-pinyin {
+    font-size: 11px;
   }
 }
 
@@ -1083,4 +1116,28 @@ body > .container > .credit {
   flex: 999;
   min-width: 100%;
   height: 0;
+}
+
+/* 빈 컨테이너에 최소 높이 적용 */
+.target-container:empty {
+  min-height: 60px; /* 빈 경우에만 최소 높이 적용 */
+  display: flex;
+}
+
+/* JavaScript 도움 없이 카드 배열에 따른 동적 크기 조정 */
+.target-container > .word:first-child:nth-last-child(1) {
+  /* 카드가 1개일 때 */
+  margin: 8px auto;
+}
+
+.target-container > .word:first-child:nth-last-child(2),
+.target-container > .word:first-child:nth-last-child(2) ~ .word {
+  /* 카드가 2개일 때 */
+  margin: 6px;
+}
+
+.target-container > .word:first-child:nth-last-child(n + 3),
+.target-container > .word:first-child:nth-last-child(n + 3) ~ .word {
+  /* 카드가 3개 이상일 때 */
+  margin: 4px;
 }
