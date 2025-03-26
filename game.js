@@ -159,11 +159,17 @@ document.addEventListener('DOMContentLoaded', function () {
     currentDay = dayKey;
     currentSentenceIndex = 0;
 
-    // 학습일 선택 화면 완전히 숨기기
+    // 학습일 선택 화면 숨기기
     daySelection.classList.add('hidden');
 
-    // 게임 화면만 표시
+    // 게임 화면 표시
     gameContainer.classList.remove('hidden');
+
+    // 제목에 Day 표시
+    const dayNumber = dayKey.replace('day', '');
+    document.getElementById(
+      'game-title'
+    ).textContent = `Day ${dayNumber} 문장 배열`;
 
     // 첫 번째 문제 로드
     loadSentence();
