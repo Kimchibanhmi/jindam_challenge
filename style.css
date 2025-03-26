@@ -15,8 +15,8 @@
 
 /* 3. 단어 카드 통일 */
 .word {
-  padding: 4px 8px;
-  margin: 2px;
+  padding: 6px 10px;
+  margin: 3px;
   background-color: #fff8e1;
   border: 1px solid #f8c68d;
   border-radius: 8px;
@@ -34,36 +34,36 @@
 }
 
 .word-char {
-  font-size: 18px;
-  margin-bottom: 0;
+  font-size: 20px;
+  margin-bottom: 1px;
   color: #333;
   font-family: 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', 'SimSun',
     sans-serif;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .word-pinyin {
-  font-size: 10px;
+  font-size: 12px;
   color: #e07a2d;
   font-family: 'Arial Unicode MS', 'Noto Sans', 'PingFang SC', sans-serif;
-  line-height: 1;
+  line-height: 1.1;
   margin-top: -1px;
 }
 
 /* 4. 정답 영역 */
 .target-container {
-  min-height: 45px;
+  min-height: 50px;
   height: auto;
-  padding: 6px 8px;
+  padding: 8px 10px;
   background-color: #fffdf7;
   border: 2px dashed #f8c68d;
-  border-radius: 15px;
+  border-radius: 10px;
   margin: 15px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   transition: height 0.3s ease;
 }
 
@@ -738,22 +738,22 @@ h2 {
 
   /* 어휘카드 간격 및 크기 최적화 */
   .word {
-    padding: 3px 6px; /* 더 작은 패딩 */
-    margin: 2px;
-    border-radius: 8px;
+    padding: 2px 5px; /* 패딩 대폭 축소 */
+    margin: 1px; /* 마진 최소화 */
+    border-radius: 6px; /* 모서리 둥글기 축소 */
     max-height: 35px; /* 모바일에서 더 낮게 제한 */
   }
 
   .word-char {
-    font-size: 16px; /* 더 작은 글꼴 크기 */
-    margin-bottom: 0; /* 간격 완전 제거 */
-    line-height: 1.1; /* 줄 간격 축소 */
+    font-size: 16px; /* 한자 크기 축소 */
+    margin-bottom: 0; /* 간격 제거 */
+    line-height: 1;
   }
 
   .word-pinyin {
-    font-size: 9px; /* 더 작은 글꼴 크기 */
-    line-height: 1; /* 줄 간격 최소화 */
-    margin-top: -2px; /* 더 많이 겹치게 */
+    font-size: 9px; /* 병음 크기 축소 */
+    line-height: 1;
+    margin-top: -2px; /* 한자와 겹치게 */
   }
 
   /* 결과 메시지 및 다음 버튼 */
@@ -765,28 +765,31 @@ h2 {
   }
 
   #next-button {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%); /* 가운데 정렬 */
-    margin: 8px auto; /* 상하 여백 약간 추가 */
-    z-index: 10;
-    height: 32px;
-    padding: 5px 15px;
-    font-size: 14px;
-    width: auto; /* 내용에 맞는 너비 */
-    min-width: 100px; /* 최소 너비 설정 */
+    position: absolute; /* 절대 위치 */
+    left: 50%; /* 화면 가운데 */
+    transform: translateX(-50%); /* 정확한 중앙 정렬 */
+    bottom: 15px; /* 하단에서 약간 띄움 */
+    width: 200px; /* 버튼 넓이 증가 */
+    height: 40px; /* 버튼 높이 증가 */
+    padding: 8px 0; /* 상하 패딩 */
+    font-size: 16px; /* 글꼴 크기 증가 */
+    border-radius: 20px; /* 더 둥글게 */
+    background-color: #f8a14c; /* 원래 색상 */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    z-index: 100; /* 항상 위에 표시 */
   }
 
-  #next-button.fixed-bottom {
-    position: fixed;
-    bottom: 15px; /* 바닥에서 약간 띄움 */
-    top: auto; /* 상단 위치 제거 */
-    margin: 0 auto;
+  /* 버튼 호버/활성 상태 */
+  #next-button:hover,
+  #next-button:active {
+    background-color: #e07a2d; /* 더 진한 색상 */
   }
 
   /* 어휘카드 간격 최소화 */
   .word-container {
-    gap: 2px; /* 매우 좁은 간격 */
+    gap: 1px; /* 최소 간격 */
     margin: 3px 0;
   }
 
@@ -802,7 +805,8 @@ h2 {
 
   .target-container {
     gap: 1px; /* 카드 간 간격 최소화 */
-    padding: 8px 4px; /* 좌우 패딩 축소 */
+    padding: 5px 3px; /* 좌우 패딩 대폭 축소 */
+    min-height: 40px; /* 기본 높이 설정 */
   }
 
   /* 어휘카드 배열 칸 높이 증가 */
