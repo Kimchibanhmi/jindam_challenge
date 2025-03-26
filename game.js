@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 2000);
   }
 
-  // 단어 클릭 이벤트
+  // 어휘 카드 클릭 처리 함수 수정
   function handleWordClick(e) {
     // 워드 엘리먼트 (클릭한 것이 자식 요소일 수도 있음)
     const wordElement = e.target.classList.contains('word')
@@ -324,6 +324,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 모든 단어가 배치되었는지 확인
     checkCompletion();
+
+    // 카드 배열 보드 크기 조정
+    adjustTargetContainerSize();
+  }
+
+  // 어휘카드 배열 칸 크기 자동 조정 함수 개선
+  function adjustTargetContainerSize() {
+    const targetContainer = document.getElementById('target-sentence');
+    const cards = targetContainer.querySelectorAll('.word');
+
+    if (cards.length === 0) {
+      // 빈 상태일 때 기본 높이 설정
+      targetContainer.style.minHeight =
+        window.innerWidth <= 768 ? '70px' : '65px';
+    } else {
+      // 카드가 있을 때는 자동 조정 (최소 높이 유지)
+      const maxCardHeight = Array.from(cards).reduce((max, card) => {
+        return Math.max(max, card.offsetHeight);
+      }, 0);
+
+      // 카드 높이보다 약간 더 크게 설정
+      targetContainer.style.minHeight = maxCardHeight + 16 + 'px';
+    }
+  }
+
+  // 다음 버튼 위치 조정
+  function updateNextButtonPosition() {
+    const nextButton = document.getElementById('next-button');
+    if (nextButton.classList.contains('hidden')) return;
+
+    if (window.innerWidth <= 768) {
+      // 모바일에서는 고정 위치 사용 안 함 (가운데 정렬)
+      nextButton.classList.remove('fixed-bottom');
+    }
   }
 
   // 완성된 문장이 맞는지 확인
@@ -521,4 +555,15 @@ document.addEventListener('DOMContentLoaded', function () {
       progressElement.textContent = `진행 상황: ${completedCount}/${finalSentences.length}`;
     }
   }
+
+  // 이벤트 리스너
+  window.addEventListener('load', function () {
+    adjustTargetContainerSize();
+    updateNextButtonPosition();
+  });
+
+  window.addEventListener('resize', function () {
+    adjustTargetContainerSize();
+    updateNextButtonPosition();
+  });
 });
