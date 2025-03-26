@@ -118,15 +118,9 @@
 
     <div class="game-wrapper">
       <div class="container">
-        <h1>문장 배열</h1>
-
-        <!-- 크레딧 추가 -->
-        <div class="credit">
-          Created by <br />
-          진아쌤과 Dukimi
-        </div>
-
-        <div id="day-selection">
+        <!-- 학습일 선택 화면 -->
+        <div id="day-selection" class="day-selection">
+          <h1 class="game-title">중국어 문장 배열 게임</h1>
           <h2>학습일 선택</h2>
           <div class="day-buttons">
             <!-- 자바스크립트로 버튼 생성 -->
@@ -134,6 +128,8 @@
         </div>
 
         <div id="game-container" class="hidden">
+          <h1 id="game-title" class="game-title">문장 배열</h1>
+          <div class="credit">Created by 진아쌤과 Dukimi</div>
           <div id="timer">남은 시간: <span id="time">20</span>초</div>
           <div id="progress">
             진행 상황: <span id="current-sentence">1</span>/10
