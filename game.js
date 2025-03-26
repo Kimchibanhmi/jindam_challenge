@@ -488,6 +488,64 @@ document.addEventListener('DOMContentLoaded', function () {
       cursor: not-allowed;
       opacity: 0.7;
     }
+
+    /* 모바일 화면에서 제목과 Created by 겹침 해결 */
+    @media (max-width: 768px) {
+      .game-title {
+        margin-bottom: 40px; /* 제목 아래 여백 늘림 */
+      }
+      
+      .credit {
+        position: relative;
+        margin-top: 10px;
+        clear: both;
+        display: block;
+      }
+    }
+  `;
+
+  // CSS 추가 (스크롤 없이 화면에 맞추기)
+  const additionalStyles = `
+    /* 모바일 최적화 추가 */
+    @media (max-width: 768px) {
+      #game-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: space-between;
+      }
+      
+      .word-container {
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .target-container {
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      /* 버튼 크기 키우기 */
+      #next-button, #back-button {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+      
+      /* 정답 메시지 위치 조정 */
+      #result-message {
+        position: fixed;
+        bottom: 20%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 100;
+        padding: 10px;
+      }
+    }
   `;
 
   // 진행 상황 업데이트 함수
@@ -513,4 +571,9 @@ document.addEventListener('DOMContentLoaded', function () {
       progressElement.textContent = `진행 상황: ${completedCount}/${finalSentences.length}`;
     }
   }
+
+  // 스타일 적용
+  const styleElement = document.createElement('style');
+  styleElement.textContent = styles + additionalStyles;
+  document.head.appendChild(styleElement);
 });
