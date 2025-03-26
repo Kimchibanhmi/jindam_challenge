@@ -15,38 +15,46 @@
 
 /* 3. 단어 카드 통일 */
 .word {
-  padding: 8px 10px;
-  margin: 4px;
+  padding: 4px 8px;
+  margin: 2px;
   background-color: #fff8e1;
   border: 1px solid #f8c68d;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  justify-content: center;
+  height: auto;
+  min-height: 0;
+  box-shadow: none;
+  max-height: 40px;
+  overflow: hidden;
 }
 
 .word-char {
-  font-size: 22px;
-  margin-bottom: 4px;
+  font-size: 18px;
+  margin-bottom: 0;
   color: #333;
   font-family: 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', 'SimSun',
     sans-serif;
+  line-height: 1.1;
 }
 
 .word-pinyin {
-  font-size: 12px;
+  font-size: 10px;
   color: #e07a2d;
   font-family: 'Arial Unicode MS', 'Noto Sans', 'PingFang SC', sans-serif;
+  line-height: 1;
+  margin-top: -1px;
 }
 
 /* 4. 정답 영역 */
 .target-container {
-  min-height: 0;
+  min-height: 45px;
   height: auto;
-  padding: 10px;
+  padding: 6px 8px;
   background-color: #fffdf7;
   border: 2px dashed #f8c68d;
   border-radius: 15px;
@@ -722,27 +730,30 @@ h2 {
 
   /* 어휘카드 배열 보드 최적화 */
   .target-container {
-    min-height: 50px; /* 기본 높이 설정 - 어휘카드보다 높게 */
-    padding: 8px 5px;
+    min-height: 40px; /* 모바일에서 더 낮게 */
+    padding: 6px 8px;
     margin: 5px 0;
     border-width: 1px; /* 테두리 얇게 */
   }
 
   /* 어휘카드 간격 및 크기 최적화 */
   .word {
-    padding: 5px 7px;
+    padding: 3px 6px; /* 더 작은 패딩 */
     margin: 2px;
     border-radius: 8px;
+    max-height: 35px; /* 모바일에서 더 낮게 제한 */
   }
 
   .word-char {
-    font-size: 18px; /* 한자 크기 축소 */
-    margin-bottom: 1px; /* 한자와 병음 사이 간격 최소화 */
+    font-size: 16px; /* 더 작은 글꼴 크기 */
+    margin-bottom: 0; /* 간격 완전 제거 */
+    line-height: 1.1; /* 줄 간격 축소 */
   }
 
   .word-pinyin {
-    font-size: 10px; /* 병음 크기 축소 */
-    line-height: 1; /* 줄 간격 축소 */
+    font-size: 9px; /* 더 작은 글꼴 크기 */
+    line-height: 1; /* 줄 간격 최소화 */
+    margin-top: -2px; /* 더 많이 겹치게 */
   }
 
   /* 결과 메시지 및 다음 버튼 */
