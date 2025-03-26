@@ -249,6 +249,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // 타이머 시작
     resetTimer();
     startTimer();
+
+    // 카드 배열 후 크기 조정
+    setTimeout(adjustTargetContainerSize, 100);
   }
 
   // 타이머 리셋
@@ -325,11 +328,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // 모든 단어가 배치되었는지 확인
     checkCompletion();
 
-    // 카드 배열 보드 크기 조정
+    // 카드 배열 셀 크기 조정
     adjustTargetContainerSize();
   }
 
-  // 어휘카드 배열 칸 크기 자동 조정 함수 개선
+  // 어휘카드 배열 셀 크기 자동 조정 함수
   function adjustTargetContainerSize() {
     const targetContainer = document.getElementById('target-sentence');
     const cards = targetContainer.querySelectorAll('.word');
@@ -337,16 +340,41 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cards.length === 0) {
       // 빈 상태일 때 기본 높이 설정
       targetContainer.style.minHeight =
-        window.innerWidth <= 768 ? '70px' : '65px';
-    } else {
-      // 카드가 있을 때는 자동 조정 (최소 높이 유지)
-      const maxCardHeight = Array.from(cards).reduce((max, card) => {
-        return Math.max(max, card.offsetHeight);
-      }, 0);
-
-      // 카드 높이보다 약간 더 크게 설정
-      targetContainer.style.minHeight = maxCardHeight + 16 + 'px';
+        window.innerWidth <= 768 ? '40px' : '50px';
+      targetContainer.style.height = 'auto';
+      return;
     }
+
+    // 1초 지연 후 계산 (카드가 배치된 후)
+    setTimeout(() => {
+      // 컨테이너의 너비
+      const containerWidth = targetContainer.offsetWidth - 20; // 패딩 고려
+
+      // 모든 카드의 너비 합산
+      let totalWidth = 0;
+      let maxCardHeight = 0;
+
+      cards.forEach((card) => {
+        totalWidth += card.offsetWidth + 4; // 마진 고려
+        maxCardHeight = Math.max(maxCardHeight, card.offsetHeight);
+      });
+
+      // 한 줄에 들어갈 수 있는지 확인
+      const rows = Math.ceil(totalWidth / containerWidth);
+
+      // 셀 높이 계산 (행 수 * 카드 높이 + 여백)
+      const newHeight = rows * maxCardHeight + rows * 4 + 12;
+
+      // 최소 높이 설정 (카드 최소 한 줄 + 여백)
+      const minHeight = window.innerWidth <= 768 ? 40 : 50;
+
+      // 높이 적용 (최소 높이보다 큰 경우에만)
+      targetContainer.style.height = `${Math.max(newHeight, minHeight)}px`;
+
+      console.log(
+        `Cards: ${cards.length}, Rows: ${rows}, New height: ${newHeight}px`
+      );
+    }, 50);
   }
 
   // 다음 버튼 위치 조정
