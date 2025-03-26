@@ -171,9 +171,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function loadSentence() {
     const sentenceData = sentences[currentDay][currentSentenceIndex];
 
-    // 진행 상황 업데이트
-    document.getElementById('current-sentence').textContent =
-      currentSentenceIndex + 1;
+    // 진행 상황 업데이트 - 이 부분을 삭제하거나 수정
+    // document.getElementById('current-sentence').textContent = currentSentenceIndex + 1;
+    // 대신 updateProgress() 함수 호출
+    updateProgress();
 
     // 한국어 문장 표시
     const koreanSentenceElement = document.getElementById('korean-sentence');
@@ -408,8 +409,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let reviewHTML = completionMessage;
     reviewHTML += '<div class="review-sentences">';
 
-    // 현재 Day의 모든 문장 표시
-    sentences[currentDay].forEach((sentence, index) => {
+    // 최종 문장만 필터링 (isFinal === true인 문장만)
+    const finalSentences = sentences[currentDay].filter(
+      (sentence) => sentence.isFinal === true
+    );
+
+    finalSentences.forEach((sentence, index) => {
       const sentenceNumber = dayStartSentence[currentDay] + index;
 
       // 띄어쓰기 없이 원본 그대로 표시
@@ -484,4 +489,28 @@ document.addEventListener('DOMContentLoaded', function () {
       opacity: 0.7;
     }
   `;
+
+  // 진행 상황 업데이트 함수
+  function updateProgress() {
+    // 1. 최종 문장만 필터링 (isFinal === true인 문장만)
+    const finalSentences = sentences[currentDay].filter(
+      (sentence) => sentence.isFinal === true
+    );
+
+    // 2. 완료된 문장 목록 가져오기
+    const completedSentences = JSON.parse(
+      localStorage.getItem(`completed_${currentDay}`) || '[]'
+    );
+
+    // 3. 완료된 최종 문장 수 계산
+    const completedCount = finalSentences.filter((sentence) =>
+      completedSentences.includes(sentence.original)
+    ).length;
+
+    // 4. 진행 상황 표시 업데이트 (게임 보드)
+    const progressElement = document.querySelector('.progress');
+    if (progressElement) {
+      progressElement.textContent = `진행 상황: ${completedCount}/${finalSentences.length}`;
+    }
+  }
 });
