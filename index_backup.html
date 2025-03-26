@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>중국어 문장 배열 게임</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- 구글 폰트 추가 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 중국어 폰트 추가 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 시작 팝업 -->
+    <div id="start-popup" class="popup">
+      <div class="popup-content">
+        <h2>1초중국어: 덩어리훈련</h2>
+        <h2>굳히기 게임!</h2>
+        <br />
+        <p>
+          <strong>⛰️목표: 10일동안 100문장이 1초 안에 '툭'</strong>
+          <br />
+        </p>
+        <p>⚫️이 게임 속 문장들은 HSK3급 <br />빈출어휘로 구성되어 있습니다.</p>
+        <p>말하기 훈련하면서 HSK3급 준비도!</p>
+        <p>⚫️진담중국어 챌린저가 참여하면 <br />더욱 효과적입니다.</p>
+        <p>🔴방법: 하루 딱 10문장! 제한 시간 안에!</p>
+        <p>각 단어 카드를 클릭하여 옳은 순서로 배열!</p>
+        <p>🌟 1초 안에 툭툭 나오는게 포인트!</p>
+        <p>🌟 꼭 '입'으로 소리내기!</p>
+        <button id="start-game-btn">게임 시작</button>
+      </div>
+    </div>
+
+    <!-- 복습 팝업 -->
+    <div id="review-popup" class="popup hidden">
+      <div class="popup-content review-content">
+        <h2>수고하셨습니다! 🎉</h2>
+        <p class="review-sub">
+          오늘 학습한 문장을 <em>순서대로</em> 복습해보세요!
+        </p>
+
+        <div class="review-sentences">
+          <!-- 자바스크립트로 동적 생성 -->
+        </div>
+
+        <button id="back-to-main" class="main-button">
+          메인 화면으로 돌아가기
+        </button>
+      </div>
+    </div>
+
+    <div class="game-wrapper">
+      <div class="container">
+        <h1>중국어 문장 배열 게임</h1>
+
+        <!-- 크레딧 추가 -->
+        <div class="credit">
+          Created by <br />
+          진아쌤과 Dukimi
+        </div>
+
+        <div id="day-selection">
+          <h2>학습일 선택</h2>
+          <div class="day-buttons">
+            <!-- 자바스크립트로 버튼 생성 -->
+          </div>
+        </div>
+
+        <div id="game-container" class="hidden">
+          <div id="timer">남은 시간: <span id="time">20</span>초</div>
+          <div id="progress">
+            진행 상황: <span id="current-sentence">1</span>/10
+          </div>
+
+          <div id="korean-sentence" class="korean-sentence">
+            <!-- 한국어 문장이 여기에 표시됩니다 -->
+          </div>
+
+          <div id="instruction">
+            <p>다음 한국어 문장에 맞게 중국어 단어를 배열하세요:</p>
+          </div>
+
+          <div id="target-sentence"></div>
+
+          <div id="word-container">
+            <!-- 여기에 단어들이 표시됩니다 -->
+          </div>
+
+          <div id="result-message"></div>
+
+          <div class="button-container">
+            <button id="next-button" class="hidden">다음 문제</button>
+            <button id="back-button" class="hidden">메인으로 돌아가기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="sentence.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

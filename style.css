@@ -1,0 +1,606 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Jua', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff3e0;
+}
+
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 10px;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #fff3e0 100%);
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(255, 152, 0, 0.2);
+  position: relative;
+  border-top: 8px solid #ff9800;
+  border-bottom: 8px solid #ff9800;
+}
+
+.credit {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 18px;
+  color: #ff7043;
+  transform: rotate(5deg);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #e65100;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #ffcc80;
+}
+
+h2 {
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.day-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 400px) {
+  .day-buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 500px) {
+  .day-buttons {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.day-button {
+  padding: 15px 5px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 3px 6px rgba(255, 152, 0, 0.3);
+}
+
+.day-button:active {
+  transform: scale(0.98);
+}
+
+.day-button:hover {
+  background-color: #f57c00;
+  transform: translateY(-2px);
+}
+
+.day-button.locked {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.hidden {
+  display: none;
+}
+
+#game-container {
+  margin-top: 20px;
+}
+
+#timer,
+#progress {
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  color: #e65100;
+}
+
+#instruction {
+  margin: 15px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #7e57c2;
+}
+
+#word-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  min-height: 100px;
+}
+
+.word {
+  width: 80px;
+  min-height: 80px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff3e0;
+  border: 1px solid #ffe0b2;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s;
+  box-shadow: 0 3px 8px rgba(255, 152, 0, 0.15);
+  padding: 8px 5px;
+  overflow: hidden;
+}
+
+.word:active {
+  transform: scale(0.95);
+}
+
+.word:hover {
+  background-color: #ffe0b2;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(255, 152, 0, 0.25);
+}
+
+.word-char {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 24px;
+  font-weight: normal;
+  margin-bottom: 5px;
+  color: #e65100;
+  letter-spacing: -0.5px;
+}
+
+.word-char.long-text {
+  font-size: 20px;
+  letter-spacing: -0.8px;
+}
+
+.word-char.very-long-text {
+  font-size: 16px;
+  letter-spacing: -1px;
+}
+
+.word-pinyin {
+  font-family: 'Arial Unicode MS', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  font-size: 14px;
+  color: #ff7043;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.word-pinyin.long-text {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+#target-sentence {
+  min-height: 90px;
+  border: 2px dashed #ffcc80;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  background-color: #fffaf0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+#next-button,
+#back-button {
+  padding: 15px 25px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+}
+
+#next-button:active,
+#back-button:active {
+  transform: scale(0.98);
+}
+
+#next-button:hover,
+#back-button:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 87, 34, 0.4);
+}
+
+#result-message {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-left: 5px solid #66bb6a;
+}
+
+.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border-left: 5px solid #ef5350;
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 20px 15px;
+  }
+
+  .credit {
+    font-size: 16px;
+    top: 10px;
+    right: 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .word {
+    width: 75px;
+    min-height: 75px;
+    padding: 6px 4px;
+  }
+
+  .word-char {
+    font-size: 22px;
+  }
+
+  .word-char.long-text {
+    font-size: 18px;
+  }
+
+  .word-char.very-long-text {
+    font-size: 14px;
+  }
+
+  .word-pinyin {
+    font-size: 12px;
+  }
+
+  .word-pinyin.long-text {
+    font-size: 10px;
+  }
+
+  .korean-sentence {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .popup-content {
+    padding: 20px 15px;
+  }
+
+  .popup-content h2 {
+    font-size: 20px;
+  }
+
+  .popup-content p {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+}
+
+.korean-sentence {
+  background-color: #fff8e1;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px 0;
+  font-size: 18px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(255, 160, 0, 0.2);
+  line-height: 1.5;
+  border-left: 5px solid #ffb74d;
+}
+
+/* 팝업 스타일 */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup-content {
+  background-color: #fff;
+  width: 85%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 15px;
+  padding: 30px 25px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: popupFadeIn 0.5s ease;
+  border-top: 10px solid #ff9800;
+  border-bottom: 10px solid #ff9800;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popup-content h2 {
+  color: #e65100;
+  margin: 5px 0;
+  font-size: 22px;
+}
+
+.popup-content p {
+  margin: 12px 0;
+  line-height: 1.5;
+  font-size: 16px;
+  color: #333;
+}
+
+.popup-content strong {
+  color: #d32f2f;
+  font-size: 18px;
+}
+
+#start-game-btn {
+  margin-top: 25px;
+  padding: 15px 35px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+}
+
+#start-game-btn:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 87, 34, 0.4);
+}
+
+#start-game-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}
+
+/* 복습 팝업 스타일 */
+#review-popup .popup-content {
+  max-width: 600px;
+  max-height: 80vh;
+  padding-bottom: 20px;
+}
+
+.review-sentences {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff8e1;
+  border-left: 5px solid #ffb74d;
+  text-align: left;
+}
+
+.sentence-item {
+  margin: 15px 0;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-left: 3px solid #ff9800;
+}
+
+.sentence-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  background-color: #ff9800;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.review-sub {
+  color: #ff7043;
+  font-size: 18px;
+  margin: 10px 0 20px 0;
+  line-height: 1.5;
+}
+
+.review-sub em {
+  font-style: normal;
+  color: #e65100;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.sentence-chinese {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 20px;
+  color: #e65100;
+  margin-bottom: 8px;
+  font-weight: normal;
+  line-height: 1.5;
+  word-spacing: normal;
+}
+
+.sentence-korean {
+  font-size: 16px;
+  color: #555;
+}
+
+.main-button {
+  margin-top: 20px;
+  padding: 15px 35px;
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+}
+
+.main-button:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 87, 34, 0.4);
+}
+
+.main-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}
+
+/* 스크롤바 스타일 */
+.review-sentences::-webkit-scrollbar {
+  width: 8px;
+}
+
+.review-sentences::-webkit-scrollbar-track {
+  background: #fff3e0;
+  border-radius: 10px;
+}
+
+.review-sentences::-webkit-scrollbar-thumb {
+  background: #ffb74d;
+  border-radius: 10px;
+}
+
+.review-sentences::-webkit-scrollbar-thumb:hover {
+  background: #ff9800;
+}
+
+.sentence-pinyin {
+  font-family: 'Arial Unicode MS', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  font-size: 14px;
+  color: #ff7043;
+  letter-spacing: 0;
+}
+
+@media (max-width: 450px) {
+  .sentence-chinese {
+    font-size: 18px;
+  }
+
+  .sentence-korean {
+    font-size: 14px;
+  }
+
+  .review-sentences {
+    max-height: 350px;
+  }
+
+  .main-button {
+    font-size: 16px;
+    padding: 12px 25px;
+  }
+}
+
+/* 기타 중국어가 나타날 수 있는 부분들에도 일관되게 적용 */
+.chinese-text {
+  font-family: 'Noto Serif SC', serif;
+}
+
+/* 필요시 @font-face 규칙으로 직접 폰트 파일 호스팅할 경우 */
+/*
+@font-face {
+  font-family: 'AlibabaPuHuiTi';
+  src: url('path/to/AlibabaPuHuiTi-Regular.woff2') format('woff2'),
+       url('path/to/AlibabaPuHuiTi-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* 간소화된 완료 메시지 스타일 */
+.next-unlock-info {
+  color: #e65100;
+  font-size: 1.1em;
+  margin: 10px 0 20px 0;
+  font-weight: bold;
+}
