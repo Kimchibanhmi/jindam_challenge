@@ -754,10 +754,55 @@ h2 {
   }
 
   #next-button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); /* 가운데 정렬 */
+    margin: 8px auto; /* 상하 여백 약간 추가 */
+    z-index: 10;
+    height: 32px;
     padding: 5px 15px;
-    height: 30px;
-    margin: 3px auto;
-    font-size: 13px;
+    font-size: 14px;
+    width: auto; /* 내용에 맞는 너비 */
+    min-width: 100px; /* 최소 너비 설정 */
+  }
+
+  #next-button.fixed-bottom {
+    position: fixed;
+    bottom: 15px; /* 바닥에서 약간 띄움 */
+    top: auto; /* 상단 위치 제거 */
+    margin: 0 auto;
+  }
+
+  /* 어휘카드 간격 최소화 */
+  .word-container {
+    gap: 2px; /* 매우 좁은 간격 */
+    margin: 3px 0;
+  }
+
+  .word {
+    margin: 1px; /* 매우 좁은 마진 */
+    padding: 4px 6px; /* 패딩 축소 */
+  }
+
+  /* 타겟 컨테이너 내부 카드 간격 조정 */
+  .target-container .word {
+    margin: 1px;
+  }
+
+  .target-container {
+    gap: 1px; /* 카드 간 간격 최소화 */
+    padding: 8px 4px; /* 좌우 패딩 축소 */
+  }
+
+  /* 어휘카드 배열 칸 높이 증가 */
+  .target-container {
+    min-height: 70px; /* 높이 증가 (기존 50px에서 늘림) */
+    height: auto; /* 내용에 따라 자동 조정 */
+  }
+
+  /* 빈 상태일 때도 높이 유지 */
+  .target-container:empty {
+    min-height: 70px;
   }
 
   /* 단어 컨테이너 여백 최소화 */
@@ -775,24 +820,33 @@ h2 {
 
 /* 모든 화면에서 어휘카드 배열 보드 최적화 */
 .target-container {
-  min-height: 55px; /* 기본 높이 - 어휘카드보다 높게 설정 */
-  height: auto;
-  padding: 10px 8px;
+  min-height: 65px; /* 기본 높이 증가 */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  box-sizing: border-box;
+  border: 2px dashed #f8c68d;
+  border-radius: 12px;
+  background-color: #fffdf7;
 }
 
-/* 어휘카드의 한자와 병음 간격 조정 */
-.word-char {
-  margin-bottom: 2px; /* 간격 축소 (기존값보다 작게) */
-}
-
-/* 터치 영역 최적화 */
+/* 카드 간 간격 조정 - 모든 화면 */
 .word {
-  touch-action: manipulation; /* 터치 동작 최적화 */
+  margin: 2px; /* 카드 간 간격 축소 */
+}
+
+/* 배열 칸 내부 카드 정렬 */
+.target-container .word {
+  margin: 1px 2px; /* 최소한의 간격만 유지 */
+}
+
+/* 자연스러운 배치를 위한 스타일 */
+.target-container::after {
+  content: '';
+  flex: 999 1 auto;
+  min-width: 20px; /* 최소 너비 감소 */
+  height: 0;
 }
 
 /* 전체 레이아웃 최적화 */
