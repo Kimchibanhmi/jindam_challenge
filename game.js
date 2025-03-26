@@ -159,8 +159,10 @@ document.addEventListener('DOMContentLoaded', function () {
     currentDay = dayKey;
     currentSentenceIndex = 0;
 
-    // 게임 화면 표시
+    // 학습일 선택 화면 완전히 숨기기
     daySelection.classList.add('hidden');
+
+    // 게임 화면만 표시
     gameContainer.classList.remove('hidden');
 
     // 첫 번째 문제 로드
@@ -445,15 +447,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 메인 화면으로 돌아가기
   function returnToMain() {
-    // 게임 컨테이너 숨기기
+    // 게임 컨테이너 완전히 숨기기
     gameContainer.classList.add('hidden');
 
-    // 학습일 선택 화면 표시
+    // 학습일 선택 화면만 표시
     daySelection.classList.remove('hidden');
 
     // 버튼 상태 초기화
     backButton.classList.add('hidden');
     nextButton.classList.add('hidden');
+
+    // 게임 관련 요소들 초기화
+    const targetSentence = document.getElementById('target-sentence');
+    if (targetSentence) targetSentence.innerHTML = '';
+
+    const wordContainer = document.getElementById('word-container');
+    if (wordContainer) wordContainer.innerHTML = '';
+
+    const resultMessage = document.getElementById('result-message');
+    if (resultMessage) resultMessage.textContent = '';
 
     // Day 버튼 다시 생성 (잠금 상태 갱신)
     createDayButtons();
