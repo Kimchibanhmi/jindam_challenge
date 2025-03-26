@@ -659,485 +659,161 @@ h2 {
 
 /* 모바일 환경 최적화 */
 @media (max-width: 768px) {
-  /* 전체 컨테이너 최적화 */
   #game-container {
-    padding: 15px 10px;
+    padding: 8px 8px 10px; /* 상하좌우 패딩 최소화 */
+    margin: 0; /* 여백 완전 제거 */
+    border-radius: 0; /* 모서리 둥글기 제거 */
+    box-shadow: none; /* 그림자 제거 */
+    max-height: 100vh; /* 최대 높이 설정 */
+    width: 100%; /* 너비 최대화 */
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
-    overflow-y: hidden;
   }
 
-  /* 게임 타이틀 축소 */
+  /* 게임 타이틀 최적화 */
   .game-title {
-    font-size: 22px;
-    margin: 5px 0 15px;
+    font-size: 18px; /* 글자 크기 축소 */
+    margin: 5px 0 10px; /* 여백 축소 */
+    padding: 0;
   }
 
-  /* 크레딧 위치 조정 */
+  /* 크레딧 조정 */
   .credit {
-    position: absolute;
+    font-size: 10px;
     top: 5px;
-    right: 10px;
-    font-size: 11px;
-    padding: 2px 5px;
+    right: 5px;
+    padding: 2px 4px;
   }
 
-  /* 점선 간격 축소 */
+  /* 구분선 여백 최소화 */
   .divider {
-    margin: 10px 0;
+    margin: 5px 0; /* 여백 최소화 */
   }
 
-  /* 타이머와 진행 상황 간격 축소 */
+  /* 남은 시간과 진행 상황 한 줄 배치 */
   .game-info {
-    padding: 3px 8px;
-    font-size: 12px;
-    margin-bottom: 8px;
-  }
-
-  /* 한국어 문장 간격 축소 */
-  #korean-sentence {
-    font-size: 16px;
-    margin: 10px 0;
-    padding: 8px;
-  }
-
-  /* 정답 컨테이너 높이 축소 */
-  .target-container {
-    min-height: auto;
-    height: auto;
-    padding: 12px 10px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-end; /* 오른쪽 정렬 */
     align-items: center;
-    gap: 8px;
+    padding: 3px 5px;
+    margin: 3px 0 5px; /* 여백 최소화 */
+    font-size: 12px;
+    background-color: transparent; /* 배경 제거 */
   }
 
-  .target-container .word {
-    margin: 3px;
+  .timer,
+  .progress {
+    display: inline-flex;
+    white-space: nowrap;
+    margin: 0;
   }
 
-  .word {
-    height: auto;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .timer {
+    margin-right: 10px;
   }
 
-  /* 지시 텍스트 간격 축소 */
-  .instruction {
+  /* 한국어 문장 여백 축소 */
+  #korean-sentence {
     font-size: 14px;
-    margin: 8px 0;
+    margin: 5px 0;
+    padding: 5px;
   }
 
-  /* 단어 카드 크기 축소 */
+  /* 어휘카드 배열 보드 최적화 */
+  .target-container {
+    min-height: 50px; /* 기본 높이 설정 - 어휘카드보다 높게 */
+    padding: 8px 5px;
+    margin: 5px 0;
+    border-width: 1px; /* 테두리 얇게 */
+  }
+
+  /* 어휘카드 간격 및 크기 최적화 */
   .word {
-    padding: 6px 8px;
-    margin: 4px;
+    padding: 5px 7px;
+    margin: 2px;
+    border-radius: 8px;
   }
 
   .word-char {
-    font-size: 20px;
-    margin-bottom: 2px;
+    font-size: 18px; /* 한자 크기 축소 */
+    margin-bottom: 1px; /* 한자와 병음 사이 간격 최소화 */
   }
 
   .word-pinyin {
-    font-size: 11px;
+    font-size: 10px; /* 병음 크기 축소 */
+    line-height: 1; /* 줄 간격 축소 */
   }
 
-  /* 단어 컨테이너 간격 축소 */
-  .word-container {
-    gap: 8px;
-    margin: 8px 0;
-  }
-
-  /* 결과 메시지와 다음 버튼 위치 조정 */
+  /* 결과 메시지 및 다음 버튼 */
   #result-message {
-    padding: 8px 15px;
-    margin: 5px auto;
-    font-size: 16px;
+    padding: 5px 10px;
+    margin: 3px auto;
+    font-size: 14px;
     max-width: 90%;
   }
 
   #next-button {
-    padding: 8px 20px;
-    height: 36px;
-    line-height: 1.2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
+    padding: 5px 15px;
+    height: 30px;
+    margin: 3px auto;
+    font-size: 13px;
   }
 
-  #next-button.fixed-bottom {
-    padding: 6px 16px;
-    height: 32px;
+  /* 단어 컨테이너 여백 최소화 */
+  .word-container {
+    gap: 5px;
+    margin: 5px 0;
   }
 
-  /* 요소들 사이 간격 조정 */
-  .game-element + .game-element {
-    margin-top: 5px;
-  }
-
-  /* 다음 버튼 항상 보이게 하기 */
-  #next-button.fixed-bottom {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  /* 지시 텍스트 축소 */
+  .instruction {
+    font-size: 12px;
+    margin: 5px 0;
   }
 }
 
-/* 학습일 선택 화면 */
-.day-selection {
-  display: block;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px 20px;
-  margin: 20px auto;
-  position: relative;
-  width: 100%;
-  max-width: 900px;
+/* 모든 화면에서 어휘카드 배열 보드 최적화 */
+.target-container {
+  min-height: 55px; /* 기본 높이 - 어휘카드보다 높게 설정 */
+  height: auto;
+  padding: 10px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
-/* 크림색 배경과 주황색 강조의 원래 디자인 */
+/* 어휘카드의 한자와 병음 간격 조정 */
+.word-char {
+  margin-bottom: 2px; /* 간격 축소 (기존값보다 작게) */
+}
+
+/* 터치 영역 최적화 */
+.word {
+  touch-action: manipulation; /* 터치 동작 최적화 */
+}
+
+/* 전체 레이아웃 최적화 */
 body {
-  font-family: 'Noto Sans KR', 'ZCOOL XiaoWei', sans-serif;
-  background-color: #fff8eb;
-  color: #333;
-  line-height: 1.6;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
-.container {
-  width: 100%;
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 0;
-}
-
-/* 게임 컨테이너 - 크림색 배경, 주황색 테두리 */
-#game-container,
-.day-selection {
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px 20px;
-  margin: 20px auto;
-  position: relative;
-  border: 2px solid #f8a14c;
-  overflow: hidden;
-}
-
-#game-container::before,
-.day-selection::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 10px;
-  background-color: #f8a14c;
-  border-radius: 20px 20px 0 0;
-}
-
-/* 게임 타이틀 - 주황색, 크게 */
-.game-title {
-  text-align: center;
-  font-size: 32px;
-  font-weight: bold;
-  margin: 10px 0 30px;
-  color: #e07a2d;
-  position: relative;
-}
-
-/* Created by 스타일 */
-.credit {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-  font-size: 14px;
-  color: #e07a2d;
-  font-family: 'Jua', sans-serif;
-}
-
-/* 구분선 - 점선 */
-.divider {
-  border: none;
-  border-top: 2px dashed #f8c68d;
-  margin: 35px 0 25px; /* 상단 여백 증가 */
-  clear: both; /* float 요소 클리어 */
-}
-
-/* 게임 정보 - 중앙 정렬, 주황색 */
-.game-info {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.timer,
-.progress {
-  display: block;
-  font-size: 20px;
-  color: #e07a2d;
-  margin: 15px 0;
-  font-weight: bold;
-}
-
-/* 한국어 문장 - 노란 배경, 둥근 모서리 */
-#korean-sentence {
-  text-align: center;
-  font-size: 20px;
-  margin: 25px 0;
-  padding: 15px;
-  background-color: #fff8e1;
-  border-radius: 15px;
-  font-weight: bold;
-}
-
-/* 타겟 컨테이너 - 점선 테두리 */
-.target-container {
-  min-height: 0;
-  height: auto;
-  padding: 10px;
-  background-color: #fffdf7;
-  border: 2px dashed #f8c68d;
-  border-radius: 15px;
-  margin: 15px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  transition: height 0.3s ease;
-}
-
-/* 단어 컨테이너 */
-.word-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin: 30px 0 15px; /* 하단 여백 축소 */
-}
-
-/* 단어 카드 - 크림색 배경, 주황색 글자 */
-.word {
-  background-color: #fff8e1;
-  border: 1px solid #f8c68d;
-  border-radius: 12px;
-  padding: 15px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 60px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.word:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.word-char {
-  font-family: 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', 'SimSun',
-    sans-serif;
-  font-size: 28px;
-  margin-bottom: 6px;
-  color: #333;
-  font-weight: normal;
-  letter-spacing: 1px;
-}
-
-.word-pinyin {
-  font-family: 'Arial Unicode MS', 'Noto Sans', 'PingFang SC', sans-serif;
-  font-size: 14px;
-  color: #e07a2d;
-  letter-spacing: 0.5px;
-}
-
-/* 결과 메시지 */
-#result-message {
-  text-align: center;
-  padding: 10px 20px;
-  margin: 5px auto 10px; /* 여백 축소 */
-  width: 80%;
-  max-width: 400px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  position: relative;
-  top: -10px; /* 위로 올림 */
-}
-
-#result-message.success {
-  background-color: #e6f4ea;
-  color: #137333;
-  border: 1px solid #34a853;
-}
-
-#result-message.error {
-  background-color: #fce8e6;
-  color: #c5221f;
-  border: 1px solid #ea4335;
-}
-
-/* 버튼 */
-#next-button,
-#back-button,
-.day-button,
-.main-button {
-  padding: 12px 24px;
-  background-color: #f8a14c;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 5px auto 15px; /* 여백 축소 */
-  display: block;
-  position: relative;
-  top: -5px; /* 위로 올림 */
-}
-
-#next-button:hover,
-#back-button:hover,
-.day-button:hover,
-.main-button:hover {
-  background-color: #e07a2d;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Day 선택 버튼 */
-.day-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 15px;
-  margin: 25px 0;
-}
-
-.day-button.completed {
-  background-color: #70af85;
-}
-
-.day-button.locked {
-  background-color: #e0e0e0;
-  color: #999;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* 추가 텍스트 설명 */
-.instruction {
-  color: #8865b7;
-  text-align: center;
-  font-size: 18px;
-  margin: 20px 0;
-}
-
-/* 모바일 환경을 위한 최소한의 조정 */
+/* 모바일에서 전체 높이 활용 */
 @media (max-width: 768px) {
-  .day-buttons {
-    grid-template-columns: repeat(3, 1fr);
+  html,
+  body,
+  #app,
+  .container {
+    height: 100%;
+    max-height: 100vh;
   }
 
-  .game-title {
-    font-size: 28px;
-    margin-bottom: 40px;
+  .container {
+    padding: 0;
+    margin: 0;
   }
-
-  .credit {
-    font-size: 12px;
-    top: 40px;
-    right: 10px;
-  }
-
-  .word {
-    padding: 6px 8px;
-  }
-
-  .word-char {
-    font-size: 20px;
-    margin-bottom: 2px;
-  }
-
-  .word-pinyin {
-    font-size: 11px;
-  }
-}
-
-/* 상단 중복 제목과 크레딧 숨기기 */
-body > .container > .game-title,
-body > .container > .credit {
-  display: none;
-}
-
-/* 또는 해당 요소가 다음과 같은 구조라면 */
-#page-header .game-title,
-#page-header .credit {
-  display: none;
-}
-
-/* 게임 보드 내부 제목과 크레딧은 그대로 유지 */
-#game-container .game-title,
-#game-container .credit {
-  display: block; /* 또는 필요한 display 속성 */
-}
-
-/* 데스크톱 및 모바일 공통 - 어휘카드 배열 영역 개선 */
-.target-container {
-  background-color: #fffdf7;
-  border: 2px dashed #f8c68d;
-  border-radius: 15px;
-  margin: 15px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* 카드가 추가될 때 컨테이너가 자연스럽게 확장되도록 설정 */
-.target-container::after {
-  content: '';
-  flex: 999;
-  min-width: 100%;
-  height: 0;
-}
-
-/* 빈 컨테이너에 최소 높이 적용 */
-.target-container:empty {
-  min-height: 60px; /* 빈 경우에만 최소 높이 적용 */
-  display: flex;
-}
-
-/* JavaScript 도움 없이 카드 배열에 따른 동적 크기 조정 */
-.target-container > .word:first-child:nth-last-child(1) {
-  /* 카드가 1개일 때 */
-  margin: 8px auto;
-}
-
-.target-container > .word:first-child:nth-last-child(2),
-.target-container > .word:first-child:nth-last-child(2) ~ .word {
-  /* 카드가 2개일 때 */
-  margin: 6px;
-}
-
-.target-container > .word:first-child:nth-last-child(n + 3),
-.target-container > .word:first-child:nth-last-child(n + 3) ~ .word {
-  /* 카드가 3개 이상일 때 */
-  margin: 4px;
 }
