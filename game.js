@@ -332,23 +332,25 @@ document.addEventListener('DOMContentLoaded', function () {
     adjustTargetContainerSize();
   }
 
-  // 어휘카드 배열 셀 크기 자동 조정 함수
+  // 어휘카드 배열 셀 크기 자동 조정 함수 개선
   function adjustTargetContainerSize() {
     const targetContainer = document.getElementById('target-sentence');
     const cards = targetContainer.querySelectorAll('.word');
 
+    // 기본 최소 높이 설정
+    const minHeight = window.innerWidth <= 768 ? 60 : 50;
+
     if (cards.length === 0) {
       // 빈 상태일 때 기본 높이 설정
-      targetContainer.style.minHeight =
-        window.innerWidth <= 768 ? '40px' : '50px';
+      targetContainer.style.minHeight = minHeight + 'px';
       targetContainer.style.height = 'auto';
       return;
     }
 
-    // 1초 지연 후 계산 (카드가 배치된 후)
+    // 약간의 지연 후 계산 (카드가 모두 배치된 후)
     setTimeout(() => {
       // 컨테이너의 너비
-      const containerWidth = targetContainer.offsetWidth - 20; // 패딩 고려
+      const containerWidth = targetContainer.offsetWidth - 20;
 
       // 모든 카드의 너비 합산
       let totalWidth = 0;
@@ -364,9 +366,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // 셀 높이 계산 (행 수 * 카드 높이 + 여백)
       const newHeight = rows * maxCardHeight + rows * 4 + 12;
-
-      // 최소 높이 설정 (카드 최소 한 줄 + 여백)
-      const minHeight = window.innerWidth <= 768 ? 40 : 50;
 
       // 높이 적용 (최소 높이보다 큰 경우에만)
       targetContainer.style.height = `${Math.max(newHeight, minHeight)}px`;
